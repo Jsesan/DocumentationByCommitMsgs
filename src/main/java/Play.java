@@ -6,7 +6,7 @@ public class Play {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese el path del project que desea documentar: \n");
+        System.out.println("Please enter the absolute path of the project you want to document of: \n");
 
         String projectName = scanner.next();
 
