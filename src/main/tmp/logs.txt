@@ -1,3 +1,9 @@
+commit de6b95b1c993bac288564f514c2ffa3238cfbedf
+Author: Jsesan <jsesan00@gmail.com>
+Date:   Fri Jul 16 12:34:20 2021 -0300
+
+    logs reader added
+
 commit b8a82b63682be8952efa034db921a4b00d9905df
 Author: Jsesan <jsesan00@gmail.com>
 Date:   Fri Jul 16 11:19:29 2021 -0300

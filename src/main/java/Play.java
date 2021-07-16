@@ -24,8 +24,15 @@ public class Play {
         GitLogsReader gitLogs= new GitLogsReader();
         gitLogs.readFile(tmpPath);
 
-        System.out.println(gitLogs.getLogs().get(0).getCommitID());
-        System.out.println(gitLogs.getLogs().get(0).getCommitMsg());
+        GitInfoReader gitInfo = new GitInfoReader();
+        gitInfo.readFile(tmpPath);
+
+        String url = gitInfo.getGitUrl().replace(".git", "/commit/");
+
+        for (LogInfo log: gitLogs.getLogs()
+             ) {
+            System.out.println("- ["+log.getCommitMsg()+"]" + "(" + url + log.getCommitID() + ")");
+        }
     }
 
 
