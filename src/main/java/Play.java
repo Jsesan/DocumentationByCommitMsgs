@@ -38,7 +38,7 @@ public class Play {
         process.waitFor();
 
 
-        System.out.println("Happy documentation");
+        System.out.println("Happy documentation :)");
     }
 
 }
