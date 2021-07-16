@@ -28,9 +28,17 @@ public class Play {
         gitInfo.readFile(tmpPath);
 
         String url = gitInfo.getGitUrl().replace(".git", "/commit/");
+        Boolean org = false;
+
+        if(url.contains("git@")){
+            url = url.replace("git@", "");
+            url = url.replace(":", "/");
+            org = true;
+        }
+
 
         WriteDoc writeDoc = new WriteDoc();
-        writeDoc.writeDoc(url,gitLogs.getLogs());
+        writeDoc.writeDoc(url,gitLogs.getLogs(),org);
 
         process = Runtime.getRuntime()
                 .exec("/bin/zsh ./clean.sh " + projectName, null, new File(bashPath));
