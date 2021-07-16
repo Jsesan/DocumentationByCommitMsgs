@@ -1,32 +1,35 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Scanner;
 
 public class Play {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingrese el path del project que desea documentar: \n");
 
         String projectName = scanner.next();
 
-        String bashPath = new File("").getAbsolutePath();
+        String basePath = new File("").getAbsolutePath();
 
-        bashPath = bashPath.concat("/src/main/bash");
+        String bashPath = basePath.concat("/src/main/bash");
 
         Process process = Runtime.getRuntime()
                 .exec("/bin/zsh ./getLogs.sh " + projectName, null, new File(bashPath));
 
+        process.waitFor();
 
+        String tmpPath = basePath.concat("/src/main/tmp");
+
+        GitLogsReader gitLogs= new GitLogsReader();
+        gitLogs.readFile(tmpPath);
+
+        System.out.println(gitLogs.getLogs().get(0).getCommitID());
+        System.out.println(gitLogs.getLogs().get(0).getCommitMsg());
     }
 
-    public static void printResults(Process process) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
-    }
+
+
 }
+
+
