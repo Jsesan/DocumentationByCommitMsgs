@@ -29,13 +29,17 @@ public class Play {
 
         String url = gitInfo.getGitUrl().replace(".git", "/commit/");
 
-        for (LogInfo log: gitLogs.getLogs()
-             ) {
-            System.out.println("- ["+log.getCommitMsg()+"]" + "(" + url + log.getCommitID() + ")");
-        }
+        WriteDoc writeDoc = new WriteDoc();
+        writeDoc.writeDoc(url,gitLogs.getLogs());
+
+        process = Runtime.getRuntime()
+                .exec("/bin/zsh ./clean.sh " + projectName, null, new File(bashPath));
+
+        process.waitFor();
+
+
+        System.out.println("Happy documentation");
     }
-
-
 
 }
 
